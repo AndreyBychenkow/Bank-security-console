@@ -14,6 +14,7 @@ class Passcard(models.Model):
 
 
 class Visit(models.Model):
+    objects = None
     created_at = models.DateTimeField(auto_now=True)
     passcard = models.ForeignKey(Passcard, on_delete=models.CASCADE)
     entered_at = models.DateTimeField()
