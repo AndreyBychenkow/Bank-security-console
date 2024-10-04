@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from django.utils.timezone import localtime
+from django.utils.timezone import localtime, now
 
 from datacenter.models import Passcard
 from datacenter.models import Visit
@@ -14,12 +14,13 @@ def passcard_info_view(request, passcode):
     this_passcard_visits = []
 
     for visit in visits:
-        duration = visit.leaved_at - visit.entered_at if visit.leaved_at else None
+        leaved_at = visit.leaved_at or now()
+        duration = leaved_at - visit.entered_at
 
         this_passcard_visits.append({
             'entered_at': localtime(visit.entered_at).strftime('%d-%m-%Y %H:%M'),
-            'duration': format_duration(duration) if duration else "Still inside",
-            'is_strange': is_visit_long(visit) if visit.leaved_at else False
+            'duration': format_duration(duration),
+            'is_strange': is_visit_long(visit)
         })
 
     context = {

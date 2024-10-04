@@ -1,3 +1,5 @@
+from django.utils.timezone import now
+
 HOURS_IN_SECONDS = 3600
 MINUTES_IN_SECONDS = 60
 LONG_VISIT_THRESHOLD = 60
@@ -11,5 +13,6 @@ def format_duration(duration):
 
 
 def is_visit_long(visit):
-    duration = visit.leaved_at - visit.entered_at
+    leaved_at = visit.leaved_at or now()
+    duration = leaved_at - visit.entered_at
     return duration.total_seconds() // MINUTES_IN_SECONDS > LONG_VISIT_THRESHOLD
