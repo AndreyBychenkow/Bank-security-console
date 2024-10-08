@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Passcard(models.Model):
+    DoesNotExist = None
     is_active = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now=True)
     passcode = models.CharField(max_length=200, unique=True)
