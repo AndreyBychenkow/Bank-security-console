@@ -26,7 +26,7 @@ ALLOWED_HOSTS = ['*']
 
 ROOT_URLCONF = 'project.urls'
 
-BASE_DIR = env.path('BASE_DIR', default=os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
